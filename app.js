@@ -25,7 +25,7 @@ async function fetchArticle(pageTitle) {
   try {
       const response = await fetch(url);
       const data = await response.json();
-      const html = data.parse.text["*"]
+      const htmlData = data.parse.text["*"]
 
       // Page title
       const title = document.createElement("h1")
@@ -33,15 +33,40 @@ async function fetchArticle(pageTitle) {
       const body = document.querySelector("body")
       
       // Append 
-      body.appendChild(title)
-      body.insertAdjacentHTML("beforeend", html)
+    //   body.appendChild(title)
+    //   body.insertAdjacentHTML("beforeend", htmlData)
 
-      console.log(html); // HTML content of the page
+    //   Local storage
+    const pageData = {
+        title: pageTitle,
+        content: htmlData
+    };
+    localStorage.setItem(pageTitle, JSON.stringify(pageData));
+
   } catch (error) {
       console.error("Error fetching data:", error);
   }
 }
 
-fetchArticle("Pet door");
 fetchArticle("Book")
+fetchArticle("Pet door");
+fetchArticle("Wikipedia");  
 
+// Retrieving JSON data
+const p = document.querySelector("p")
+
+for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    const savedData = JSON.parse(localStorage.getItem(key));
+    
+  const title = document.createElement("h1")
+  title.innerText = savedData.title
+  
+  console.log(title);
+  
+  p.appendChild(title)
+}
+
+
+const listWrapper = document.createElement("ul")
+const li = document.createElement("li")
