@@ -52,21 +52,43 @@ fetchArticle("Book")
 fetchArticle("Pet door");
 fetchArticle("Wikipedia");  
 
+
+// Helper functions
+const createElement = (elt) => document.createElement(elt)
+
 // Retrieving JSON data
 const p = document.querySelector("p")
-
+/**
+ * Improve the loop w/ object.key
+ * https://javascript.info/localstorage
+ */
 for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
     const savedData = JSON.parse(localStorage.getItem(key));
     
-  const title = document.createElement("h1")
+  const title = createElement("h1")
   title.innerText = savedData.title
-  
-  console.log(title);
   
   p.appendChild(title)
 }
 
+function displayPage(event) {
+    const output = event.currentTarget
 
-const listWrapper = document.createElement("ul")
-const li = document.createElement("li")
+    const body = document.querySelector("body")
+
+    const title = createElement("h1")
+    const content = createElement("div")
+    
+    title.innerText = output.innerText
+    const test = title.innerText
+    let key = localStorage.key(test)
+    const article = JSON.parse(localStorage.getItem(key))
+    content.innerHTML = article.content
+
+    body.appendChild(title)
+    body.appendChild(content)
+    
+}
+
+document.querySelector("h1").addEventListener("click", displayPage)
