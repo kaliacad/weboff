@@ -7,8 +7,6 @@
 //     return data;
 //   }
 
-//   console.log("testing...");
-  
 
 //   console.log(fetchArticle("Book"));
 
@@ -28,15 +26,10 @@ async function fetchArticle(pageTitle) {
       const htmlData = data.parse.text["*"]
 
       // Page title
-      const title = document.createElement("h1")
+      const title = createElement("h1")
       title.innerText = pageTitle
-      const body = document.querySelector("body")
       
-      // Append 
-    //   body.appendChild(title)
-    //   body.insertAdjacentHTML("beforeend", htmlData)
-
-    //   Local storage
+    //   Save on Local storage
     const pageData = {
         title: pageTitle,
         content: htmlData
@@ -81,9 +74,9 @@ function displayPage(event) {
     const content = createElement("div")
     
     title.innerText = output.innerText
-    const test = title.innerText
-    let key = localStorage.key(test)
-    const article = JSON.parse(localStorage.getItem(key))
+    const titleTxt = title.innerText
+    
+    const article = JSON.parse(localStorage.getItem(titleTxt))
     content.innerHTML = article.content
 
     body.appendChild(title)
@@ -91,4 +84,11 @@ function displayPage(event) {
     
 }
 
-document.querySelector("h1").addEventListener("click", displayPage)
+// Handle click on title
+const titleList = document.querySelectorAll("h1")
+console.log(titleList);
+
+
+for (let i = 0; i < titleList.length; i++) {
+  titleList[i].addEventListener("click", displayPage);
+}
