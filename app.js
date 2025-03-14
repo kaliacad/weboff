@@ -50,7 +50,7 @@ fetchArticle("Wikipedia");
 const createElement = (elt) => document.createElement(elt)
 
 // Retrieving JSON data
-const p = document.querySelector("p")
+const aside = document.querySelector("aside")
 /**
  * Improve the loop w/ object.key
  * https://javascript.info/localstorage
@@ -62,13 +62,13 @@ for (let i = 0; i < localStorage.length; i++) {
   const title = createElement("h1")
   title.innerText = savedData.title
   
-  p.appendChild(title)
+  aside.appendChild(title)
 }
 
 function displayPage(event) {
     const output = event.currentTarget
 
-    const body = document.querySelector("body")
+    const main = document.querySelector("main")
 
     const title = createElement("h1")
     const content = createElement("div")
@@ -79,15 +79,16 @@ function displayPage(event) {
     const article = JSON.parse(localStorage.getItem(titleTxt))
     content.innerHTML = article.content
 
-    body.appendChild(title)
-    body.appendChild(content)
+    // Clear the content first
+    main.innerHTML = ""
+    
+    main.appendChild(title)
+    main.appendChild(content)
     
 }
 
 // Handle click on title
 const titleList = document.querySelectorAll("h1")
-console.log(titleList);
-
 
 for (let i = 0; i < titleList.length; i++) {
   titleList[i].addEventListener("click", displayPage);
