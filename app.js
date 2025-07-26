@@ -8,8 +8,6 @@
 //   }
 
 
-//   console.log(fetchArticle("Book"));
-
 // Using parse
 async function fetchArticle(pageTitle) {
   const url = "https://en.wikipedia.org/w/api.php?" +
@@ -43,8 +41,19 @@ async function fetchArticle(pageTitle) {
 
 fetchArticle("Book")
 fetchArticle("Pet door");
-fetchArticle("Wikipedia");  
+fetchArticle("Wikipedia");
+fetchArticle("Africa");  
+fetchArticle("Kisangani");
 
+// Fetch from the user
+const submitButton = document.querySelector("input[type=button]")
+submitButton.addEventListener("click", function() {
+  const pageTitle = document.querySelector("input[type=text]").value
+  fetchArticle(pageTitle)
+  console.log(pageTitle);
+  
+  // location.reload()
+})
 
 // Helper functions
 const createElement = (elt) => document.createElement(elt)
@@ -56,10 +65,10 @@ const aside = document.querySelector("aside")
  * https://javascript.info/localstorage
  */
 for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    const savedData = JSON.parse(localStorage.getItem(key));
+  let key = localStorage.key(i);
+  const savedData = JSON.parse(localStorage.getItem(key));
     
-  const title = createElement("h1")
+  const title = createElement("a")
   title.innerText = savedData.title
   
   aside.appendChild(title)
@@ -81,14 +90,14 @@ function displayPage(event) {
 
     // Clear the content first
     main.innerHTML = ""
-    
+
     main.appendChild(title)
     main.appendChild(content)
     
 }
 
 // Handle click on title
-const titleList = document.querySelectorAll("h1")
+const titleList = document.querySelectorAll("a")
 
 for (let i = 0; i < titleList.length; i++) {
   titleList[i].addEventListener("click", displayPage);

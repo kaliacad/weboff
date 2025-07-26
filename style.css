@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 .container {
     display: flex;
     /* flex-direction: column; */
@@ -13,6 +16,22 @@ aside {
     width: 15%;
     background-color: #f9f9f9;
     border-right: 2px solid #e1e1e1;
+}
+
+aside a {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    line-height: 1.5em;
+}
+
+aside a:hover {
+    background-color: #818b981a;
+}
+
+aside a:active {
+    background-color: #818b9826;
+    border-left: 2px solid blue;
 }
 
 main {
